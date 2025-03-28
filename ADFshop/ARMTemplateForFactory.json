@@ -286,6 +286,64 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/02-pipeline-etl_factSales')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Data flow1",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "dataflow factSales",
+								"type": "DataFlowReference",
+								"parameters": {},
+								"datasetParameters": {
+									"salesOrderHeader": {},
+									"salesOrderDetails": {},
+									"factSales": {}
+								}
+							},
+							"staging": {
+								"linkedService": {
+									"referenceName": "BlobStaging",
+									"type": "LinkedServiceReference"
+								},
+								"folderPath": "stagedata"
+							},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							},
+							"traceLevel": "None",
+							"cacheSinks": {
+								"firstRowOnly": true
+							}
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {}
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/dataflows/dataflow factSales')]",
+				"[concat(variables('factoryId'), '/linkedServices/BlobStaging')]",
+				"[concat(variables('factoryId'), '/integrationRuntimes/AutoResolveIntegrationRuntime')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/03-pipeline-etl-dimCustomer')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
@@ -320,9 +378,9 @@
 								},
 								"folderPath": "stagedata"
 							},
-							"integrationRuntime": {
-								"referenceName": "AzureIntegration",
-								"type": "IntegrationRuntimeReference"
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
 							},
 							"traceLevel": "Fine"
 						}
@@ -336,8 +394,7 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/dataflows/dataflow dimCustomer')]",
-				"[concat(variables('factoryId'), '/linkedServices/BlobStaging')]",
-				"[concat(variables('factoryId'), '/integrationRuntimes/AzureIntegration')]"
+				"[concat(variables('factoryId'), '/linkedServices/BlobStaging')]"
 			]
 		},
 		{
@@ -854,15 +911,9 @@
 						"type": "SecureString",
 						"value": "[parameters('BlobStaging_accountKey')]"
 					}
-				},
-				"connectVia": {
-					"referenceName": "AzureIntegration",
-					"type": "IntegrationRuntimeReference"
 				}
 			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/integrationRuntimes/AzureIntegration')]"
-			]
+			"dependsOn": []
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/Storage')]",
@@ -877,15 +928,9 @@
 						"type": "SecureString",
 						"value": "[parameters('Storage_accountKey')]"
 					}
-				},
-				"connectVia": {
-					"referenceName": "AzureIntegration",
-					"type": "IntegrationRuntimeReference"
 				}
 			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/integrationRuntimes/AzureIntegration')]"
-			]
+			"dependsOn": []
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/sqlserver110')]",
@@ -905,15 +950,9 @@
 						"type": "SecureString",
 						"value": "[parameters('sqlserver110_password')]"
 					}
-				},
-				"connectVia": {
-					"referenceName": "AzureIntegration",
-					"type": "IntegrationRuntimeReference"
 				}
 			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/integrationRuntimes/AzureIntegration')]"
-			]
+			"dependsOn": []
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/synapse')]",
@@ -933,15 +972,9 @@
 						"type": "SecureString",
 						"value": "[parameters('synapse_password')]"
 					}
-				},
-				"connectVia": {
-					"referenceName": "AzureIntegration",
-					"type": "IntegrationRuntimeReference"
 				}
 			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/integrationRuntimes/AzureIntegration')]"
-			]
+			"dependsOn": []
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/synapsewspc-WorkspaceDefaultSqlServer')]",
@@ -1166,39 +1199,6 @@
 							"timeToLive": 0
 						}
 					}
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/AzureIntegration')]",
-			"type": "Microsoft.DataFactory/factories/integrationRuntimes",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"type": "Managed",
-				"typeProperties": {
-					"computeProperties": {
-						"location": "AutoResolve",
-						"dataFlowProperties": {
-							"computeType": "General",
-							"coreCount": 8,
-							"timeToLive": 10,
-							"cleanup": false,
-							"customProperties": []
-						}
-					}
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/integrationRuntime3')]",
-			"type": "Microsoft.DataFactory/factories/integrationRuntimes",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"type": "SelfHosted",
-				"typeProperties": {
-					"selfContainedInteractiveAuthoringEnabled": true
 				}
 			},
 			"dependsOn": []
