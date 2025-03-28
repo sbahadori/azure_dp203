@@ -1,0 +1,17 @@
+{
+	"name": "01- DDL dimCustomer",
+	"properties": {
+		"content": {
+			"query": "\nCREATE TABLE dimCustomer(\n    CustomerID\tint\t,\n    CompanyName\tnvarchar(200)\n)\nWITH(\n    DISTRIBUTION = REPLICATE\n)\n\nCREATE TABLE factSales\n(\n    SalesOrderID int NOT NULL,\n    OrderDate datetime NOT NULL,\n    CustomerID int NOT NULL,\n    SubTotal money NOT NULL,\n    TaxAmt money NOT NULL,\n    Freight money NOT NULL,\n    TotalDue money NOT NULL,\n    OrderQty int,\n    ProductID int NOT NULL,\n    UnitPrice money NOT NULL,\n    UnitPriceDiscount money NOT NULL,\n    LineTotal decimal NOT NULL\n)\nWITH(\n    DISTRIBUTION= HASH(SalesOrderID)\n)\n\nCREATE TABLE dimProduct\n(\n    ProductID int  NULL,\n    ProductNumber varchar(100)  NULL,\n    Color varchar(20) NULL,\n    ProductCategoryID int  NULL,\n    ProductCategoryName varchar(200) NULL\n\n)\nWITH (\n    DISTRIBUTION = REPLICATE\n)\n\n\nCREATE TABLE PoolActivityLog\n(\n   [Correlationid] varchar(200),\n   [Operationname] varchar(300),\n   [Status] varchar(100),\n   [Eventcategory] varchar(100),\n   [Level] varchar(100),\n   [Time] varchar(100),\n   [Subscription] varchar(200),\n   [Eventinitiatedby] varchar(1000),\n   [Resourcetype] varchar(300),\n   [Resourcegroup] varchar(1000),\n   [Resource] varchar(2000)\n)\nWITH(\n    DISTRIBUTION=ROUND_ROBIN\n)\n\n\n",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"databaseName": "synapse",
+				"poolName": "synapse"
+			},
+			"resultLimit": 5000
+		},
+		"type": "SqlQuery"
+	}
+}
