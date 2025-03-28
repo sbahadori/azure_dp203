@@ -1,0 +1,17 @@
+{
+	"name": "Hourky",
+	"properties": {
+		"annotations": [],
+		"runtimeState": "Stopped",
+		"pipelines": [],
+		"type": "ScheduleTrigger",
+		"typeProperties": {
+			"recurrence": {
+				"frequency": "Hour",
+				"interval": 2,
+				"startTime": "2025-03-26T23:26:00",
+				"timeZone": "Eastern Standard Time"
+			}
+		}
+	}
+}

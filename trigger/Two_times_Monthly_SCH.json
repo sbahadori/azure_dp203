@@ -1,0 +1,29 @@
+{
+	"name": "Two_times_Monthly_SCH",
+	"properties": {
+		"annotations": [],
+		"runtimeState": "Stopped",
+		"pipelines": [],
+		"type": "ScheduleTrigger",
+		"typeProperties": {
+			"recurrence": {
+				"frequency": "Month",
+				"interval": 1,
+				"startTime": "2025-03-26T23:24:00",
+				"timeZone": "Eastern Standard Time",
+				"schedule": {
+					"minutes": [
+						0
+					],
+					"hours": [
+						3
+					],
+					"monthDays": [
+						11,
+						25
+					]
+				}
+			}
+		}
+	}
+}

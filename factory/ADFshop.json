@@ -1,0 +1,9 @@
+{
+	"name": "ADFshop",
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "1ebfccc9-eda9-440d-a51d-e4cdfc457d1d",
+		"tenantId": "c963f532-47e1-4a69-8d52-3a9129bd5d94"
+	}
+}

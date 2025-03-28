@@ -1,0 +1,16 @@
+{
+	"name": "Storage",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "AzureBlobFS",
+		"typeProperties": {
+			"url": "https://shopdatastrg.dfs.core.windows.net/",
+			"encryptedCredential": "ew0KICAiVmVyc2lvbiI6ICIyMDE3LTExLTMwIiwNCiAgIlByb3RlY3Rpb25Nb2RlIjogIktleSIsDQogICJTZWNyZXRDb250ZW50VHlwZSI6ICJQbGFpbnRleHQiLA0KICAiQ3JlZGVudGlhbElkIjogIkRBVEFGQUNUT1JZQEQ2MTgzMTJDLURFNDItNDVBRS05NEIxLTEwNkI1QUI0MUQ1QV9mMzhhN2U3MC02M2ZlLTQzZjgtYTkyYi03M2U0Njc5OTEyMTQiDQp9"
+		},
+		"connectVia": {
+			"referenceName": "AzureIntegration",
+			"type": "IntegrationRuntimeReference"
+		}
+	}
+}

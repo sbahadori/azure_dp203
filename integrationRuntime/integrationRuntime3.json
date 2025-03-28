@@ -1,0 +1,9 @@
+{
+	"name": "integrationRuntime3",
+	"properties": {
+		"type": "SelfHosted",
+		"typeProperties": {
+			"selfContainedInteractiveAuthoringEnabled": true
+		}
+	}
+}
