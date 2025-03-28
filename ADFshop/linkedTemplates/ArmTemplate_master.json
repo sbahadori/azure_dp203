@@ -1,0 +1,161 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "ADFshop"
+		},
+		"BlobStaging_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'BlobStaging'"
+		},
+		"Storage_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'Storage'"
+		},
+		"sqlserver110_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'sqlserver110'"
+		},
+		"synapse_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'synapse'"
+		},
+		"synapsewspc-WorkspaceDefaultSqlServer_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'synapsewspc-WorkspaceDefaultSqlServer'",
+			"defaultValue": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=tcp:synapsewspc.sql.azuresynapse.net,1433;Initial Catalog=@{linkedService().DBName}"
+		},
+		"BlobStaging_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://shopdatastrg.dfs.core.windows.net/"
+		},
+		"Storage_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://shopdatastrg.dfs.core.windows.net/"
+		},
+		"sqlserver110_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "sqlserver110.database.windows.net"
+		},
+		"sqlserver110_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "sqldb"
+		},
+		"sqlserver110_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "dbadmin"
+		},
+		"synapse_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "synapsewspc.sql.azuresynapse.net"
+		},
+		"synapse_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "synapse"
+		},
+		"synapse_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "dbadmin"
+		},
+		"synapsewspc-WorkspaceDefaultStorage_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://shopsynapsedatasg.dfs.core.windows.net"
+		},
+		"containerUri": {
+			"type": "string",
+			"metadata": "URI to storage account containing linked ARM templates"
+		},
+		"containerSasToken": {
+			"type": "string",
+			"metadata": "Sas token to storage account containing linked ARM templates"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "ADFshop_ArmTemplate_0",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2024-03-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_0.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"BlobStaging_accountKey": {
+						"value": "[parameters('BlobStaging_accountKey')]"
+					},
+					"Storage_accountKey": {
+						"value": "[parameters('Storage_accountKey')]"
+					},
+					"sqlserver110_password": {
+						"value": "[parameters('sqlserver110_password')]"
+					},
+					"synapse_password": {
+						"value": "[parameters('synapse_password')]"
+					},
+					"synapsewspc-WorkspaceDefaultSqlServer_connectionString": {
+						"value": "[parameters('synapsewspc-WorkspaceDefaultSqlServer_connectionString')]"
+					},
+					"BlobStaging_properties_typeProperties_url": {
+						"value": "[parameters('BlobStaging_properties_typeProperties_url')]"
+					},
+					"Storage_properties_typeProperties_url": {
+						"value": "[parameters('Storage_properties_typeProperties_url')]"
+					},
+					"sqlserver110_properties_typeProperties_server": {
+						"value": "[parameters('sqlserver110_properties_typeProperties_server')]"
+					},
+					"sqlserver110_properties_typeProperties_database": {
+						"value": "[parameters('sqlserver110_properties_typeProperties_database')]"
+					},
+					"sqlserver110_properties_typeProperties_userName": {
+						"value": "[parameters('sqlserver110_properties_typeProperties_userName')]"
+					},
+					"synapse_properties_typeProperties_server": {
+						"value": "[parameters('synapse_properties_typeProperties_server')]"
+					},
+					"synapse_properties_typeProperties_database": {
+						"value": "[parameters('synapse_properties_typeProperties_database')]"
+					},
+					"synapse_properties_typeProperties_userName": {
+						"value": "[parameters('synapse_properties_typeProperties_userName')]"
+					},
+					"synapsewspc-WorkspaceDefaultStorage_properties_typeProperties_url": {
+						"value": "[parameters('synapsewspc-WorkspaceDefaultStorage_properties_typeProperties_url')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "ADFshop_ArmTemplate_1",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2024-03-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_1.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'ADFshop_ArmTemplate_0')]"
+			]
+		}
+	]
+}
