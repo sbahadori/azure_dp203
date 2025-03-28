@@ -1,0 +1,51 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"workspaceName": {
+			"value": "synapsewspc"
+		},
+		"BlobStaging_accountKey": {
+			"value": ""
+		},
+		"Storage_accountKey": {
+			"value": ""
+		},
+		"sqlserver110_password": {
+			"value": ""
+		},
+		"synapse_password": {
+			"value": ""
+		},
+		"synapsewspc-WorkspaceDefaultSqlServer_connectionString": {
+			"value": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=tcp:synapsewspc.sql.azuresynapse.net,1433;Initial Catalog=@{linkedService().DBName}"
+		},
+		"BlobStaging_properties_typeProperties_url": {
+			"value": "https://shopdatastrg.dfs.core.windows.net/"
+		},
+		"Storage_properties_typeProperties_url": {
+			"value": "https://shopdatastrg.dfs.core.windows.net/"
+		},
+		"sqlserver110_properties_typeProperties_server": {
+			"value": "sqlserver110.database.windows.net"
+		},
+		"sqlserver110_properties_typeProperties_database": {
+			"value": "sqldb"
+		},
+		"sqlserver110_properties_typeProperties_userName": {
+			"value": "dbadmin"
+		},
+		"synapse_properties_typeProperties_server": {
+			"value": "synapsewspc.sql.azuresynapse.net"
+		},
+		"synapse_properties_typeProperties_database": {
+			"value": "synapse"
+		},
+		"synapse_properties_typeProperties_userName": {
+			"value": "dbadmin"
+		},
+		"synapsewspc-WorkspaceDefaultStorage_properties_typeProperties_url": {
+			"value": "https://shopsynapsedatasg.dfs.core.windows.net"
+		}
+	}
+}
