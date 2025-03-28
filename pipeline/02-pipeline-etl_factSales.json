@@ -3,7 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "Data flow1",
+				"name": "dataflow factSales",
 				"type": "ExecuteDataFlow",
 				"dependsOn": [],
 				"policy": {
@@ -26,9 +26,9 @@
 						},
 						"folderPath": "stagedata"
 					},
-					"integrationRuntime": {
-						"referenceName": "AzureIntegration",
-						"type": "IntegrationRuntimeReference"
+					"compute": {
+						"coreCount": 8,
+						"computeType": "General"
 					},
 					"traceLevel": "None",
 					"cacheSinks": {
