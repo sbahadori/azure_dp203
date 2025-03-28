@@ -62,7 +62,7 @@
 				"          rowguid as string,",
 				"          ModifiedDate as timestamp",
 				"     ),",
-				"     allowSchemaDrift: false,",
+				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     isolationLevel: 'READ_UNCOMMITTED',",
 				"     format: 'table') ~> salesOrderHeader",
