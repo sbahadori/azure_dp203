@@ -637,7 +637,7 @@
 			"properties": {
 				"activities": [
 					{
-						"name": "Data flow1",
+						"name": "dataflow factSales",
 						"type": "ExecuteDataFlow",
 						"dependsOn": [],
 						"policy": {
